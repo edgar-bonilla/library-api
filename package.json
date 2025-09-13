@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.21.1",
     "js-yaml": "^4.1.0",
-    "lowdb": "^2.5.3",
+    "lowdb": "^3.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
