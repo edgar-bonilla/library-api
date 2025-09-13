@@ -1,0 +1,44 @@
+{
+  "books": [
+    {
+      "bookId": "1",
+      "title": "Don Quijote de la Mancha",
+      "edition": "1ra edición",
+      "copyright": "1605",
+      "language": "Español",
+      "pages": 992,
+      "authorId": "1",
+      "publisherId": "1"
+    },
+    {
+      "bookId": "2",
+      "title": "Cien años de soledad",
+      "edition": "2da edición",
+      "copyright": "1967",
+      "language": "Español",
+      "pages": 471,
+      "authorId": "2",
+      "publisherId": "2"
+    },
+    {
+      "bookId": "3",
+      "title": "Rayuela",
+      "edition": "3ra edición",
+      "copyright": "1963",
+      "language": "Español",
+      "pages": 500,
+      "authorId": "3",
+      "publisherId": "3"
+    },
+    {
+      "bookId": "4",
+      "title": "Pedro Páramo",
+      "edition": "1ra edición",
+      "copyright": "1955",
+      "language": "Español",
+      "pages": 124,
+      "authorId": "4",
+      "publisherId": "4"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "authors": [
+    {
+      "authorId": "1",
+      "name": "Miguel de Cervantes",
+      "nationality": "Española",
+      "birthYear": 1547
+    },
+    {
+      "authorId": "2",
+      "name": "Gabriel García Márquez",
+      "nationality": "Colombiana",
+      "birthYear": 1927
+    },
+    {
+      "authorId": "3",
+      "name": "Julio Cortázar",
+      "nationality": "Argentina",
+      "birthYear": 1914
+    },
+    {
+      "authorId": "4",
+      "name": "Juan Rulfo",
+      "nationality": "Mexicana",
+      "birthYear": 1917
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+openapi: 3.0.0
+info:
+  title: API de Libros, Autores y Editoriales
+  description: Servicio web para gestionar libros, autores y editoriales relacionados por IDs.
+  version: 0.3.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+  - url: https://tu-sitio.netlify.app/.netlify/functions/api
+    description: Despliegue en Netlify (ajusta la URL)
+paths:
+  /books/{bookId}:
+    get:
+      summary: Obtiene un libro por su ID
+      operationId: booksBookIdGET
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del libro
+      responses:
+        '200':
+          description: Libro encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Libro no encontrado
+        '500':
+          description: Error interno del servidor
+    put:
+      summary: Actualiza un libro por su ID
+      operationId: booksBookIdPUT
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del libro a actualizar
+      requestBody:
+        description: Datos actualizados del libro (el bookId no se puede cambiar)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Libro actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Error de validación en los datos
+        '404':
+          description: Libro no encontrado
+        '500':
+          description: Error interno del servidor
+    delete:
+      summary: Elimina un libro por su ID
+      operationId: booksBookIdDELETE
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del libro a eliminar
+      responses:
+        '200':
+          description: Libro eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Libro eliminado"
+        '404':
+          description: Libro no encontrado
+        '500':
+          description: Error interno del servidor
+  /books:
+    get:
+      summary: Lista todos los libros
+      operationId: booksGET
+      responses:
+        '200':
+          description: Lista de libros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '500':
+          description: Error interno del servidor
+    post:
+      summary: Crea un nuevo libro
+      operationId: booksPOST
+      requestBody:
+        description: Datos del nuevo libro (genera un bookId único si no se proporciona)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Libro creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Error de validación (ej. authorId o publisherId inexistentes)
+        '500':
+          description: Error interno del servidor
+  /authors/{authorId}:
+    get:
+      summary: Obtiene un autor por su ID
+      operationId: authorsAuthorIdGET
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del autor
+      responses:
+        '200':
+          description: Autor encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: Autor no encontrado
+        '500':
+          description: Error interno del servidor
+    put:
+      summary: Actualiza un autor por su ID
+      operationId: authorsAuthorIdPUT
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del autor a actualizar
+      requestBody:
+        description: Datos actualizados del autor (el authorId no se puede cambiar)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: Autor actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: Error de validación en los datos
+        '404':
+          description: Autor no encontrado
+        '500':
+          description: Error interno del servidor
+    delete:
+      summary: Elimina un autor por su ID
+      operationId: authorsAuthorIdDELETE
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único del autor a eliminar
+      responses:
+        '200':
+          description: Autor eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Autor eliminado"
+        '400':
+          description: Error de validación
+        '409':
+          description: Conflicto - Autor referenciado por libros
+        '404':
+          description: Autor no encontrado
+        '500':
+          description: Error interno del servidor
+  /authors:
+    get:
+      summary: Lista todos los autores
+      operationId: authorsGET
+      responses:
+        '200':
+          description: Lista de autores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+        '500':
+          description: Error interno del servidor
+    post:
+      summary: Crea un nuevo autor
+      operationId: authorsPOST
+      requestBody:
+        description: Datos del nuevo autor (genera un authorId único si no se proporciona)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '201':
+          description: Autor creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: Error de validación en los datos
+        '500':
+          description: Error interno del servidor
+  /publishers/{publisherId}:
+    get:
+      summary: Obtiene una editorial por su ID
+      operationId: publishersPublisherIdGET
+      parameters:
+        - name: publisherId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único de la editorial
+      responses:
+        '200':
+          description: Editorial encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        '404':
+          description: Editorial no encontrada
+        '500':
+          description: Error interno del servidor
+    put:
+      summary: Actualiza una editorial por su ID
+      operationId: publishersPublisherIdPUT
+      parameters:
+        - name: publisherId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único de la editorial a actualizar
+      requestBody:
+        description: Datos actualizados de la editorial (el publisherId no se puede cambiar)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+      responses:
+        '200':
+          description: Editorial actualizada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        '400':
+          description: Error de validación en los datos
+        '404':
+          description: Editorial no encontrada
+        '500':
+          description: Error interno del servidor
+    delete:
+      summary: Elimina una editorial por su ID
+      operationId: publishersPublisherIdDELETE
+      parameters:
+        - name: publisherId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID único de la editorial a eliminar
+      responses:
+        '200':
+          description: Editorial eliminada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Editorial eliminada"
+        '400':
+          description: Error de validación
+        '409':
+          description: Conflicto - Editorial referenciada por libros
+        '404':
+          description: Editorial no encontrada
+        '500':
+          description: Error interno del servidor
+  /publishers:
+    get:
+      summary: Lista todas las editoriales
+      operationId: publishersGET
+      responses:
+        '200':
+          description: Lista de editoriales
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+        '500':
+          description: Error interno del servidor
+    post:
+      summary: Crea una nueva editorial
+      operationId: publishersPOST
+      requestBody:
+        description: Datos de la nueva editorial (genera un publisherId único si no se proporciona)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+      responses:
+        '201':
+          description: Editorial creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        '400':
+          description: Error de validación en los datos
+        '500':
+          description: Error interno del servidor
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        bookId:
+          type: string
+          example: "book-123"
+        title:
+          type: string
+          example: "El Quijote"
+        edition:
+          type: string
+          example: "1ra edición"
+        copyright:
+          type: string
+          example: "1605"
+        language:
+          type: string
+          example: "Español"
+        pages:
+          type: integer
+          example: 992
+          description: Número de páginas (entero positivo)
+        authorId:
+          type: string
+          example: "author-456"
+          description: ID del autor (debe existir en la base de datos)
+        publisherId:
+          type: string
+          example: "publisher-789"
+          description: ID de la editorial (debe existir en la base de datos)
+      required:
+        - bookId
+        - title
+        - authorId
+        - publisherId
+    Author:
+      type: object
+      properties:
+        authorId:
+          type: string
+          example: "author-456"
+        name:
+          type: string
+          example: "Miguel de Cervantes"
+        nationality:
+          type: string
+          example: "Española"
+      required:
+        - authorId
+        - name
+    Publisher:
+      type: object
+      properties:
+        publisherId:
+          type: string
+          example: "publisher-789"
+        name:
+          type: string
+          example: "Editorial Planeta"
+        country:
+          type: string
+          example: "España"
+      required:
+        - publisherId
+        - name

@@ -1,0 +1,24 @@
+{
+  "name": "library-api",
+  "version": "1.0.0",
+  "description": "API for managing books, authors, and publishers using OpenAPI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["api", "books", "openapi"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "js-yaml": "^4.1.0",
+    "lowdb": "^2.5.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

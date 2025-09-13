@@ -1,0 +1,24 @@
+{
+  "publishers": [
+    {
+      "publisherId": "1",
+      "name": "Editorial Española",
+      "country": "España"
+    },
+    {
+      "publisherId": "2",
+      "name": "Sudamericana",
+      "country": "Argentina"
+    },
+    {
+      "publisherId": "3",
+      "name": "Ediciones Alfaguara",
+      "country": "España"
+    },
+    {
+      "publisherId": "4",
+      "name": "Fondo de Cultura Económica",
+      "country": "México"
+    }
+  ]
+}
