@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');            // <-- Agregado
 const YAML = require('js-yaml');
 const fs = require('fs');
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -10,8 +11,8 @@ const controller = require('./controllers/DefaultController');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-
 // Middleware
+app.use(cors());                        // <-- Agregado para permitir CORS
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
